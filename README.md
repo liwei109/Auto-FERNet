@@ -8,16 +8,27 @@ The dataloaders of _FER2013, CK48_ and _JAFFE_ are conducted in `dataloader/data
 ## Architecture Search
 We conduct Neural Achitecture Search (NAS) on _FER2013_ based on [SGAS](https://arxiv.org/abs/1912.00195).
 
-* Run `train_search.py` to search for the best architecture for _FER2013_.
+* To search for the best architecture for _FER2013_, run
+```angular2html
+python train_search.py --batch_size 24 --batch_increase 8 --learning_rate 0.025
+```
 * The `NAS/model_search.py` and `NAS/operations.py` defines the search space and the candidate operations in each edge.
 * The `NAS/architect.py` consists of the computational steps in architecture search.
 * The `NAS/genotypes.py` saves the searched architecture. You can add the searched structure into this file manually.
 
 ## Retraining on _FER2013_
-After search the optimal architecture on _FER2013_, you can run `train_FER2013.py` to retrain the model from scratch and test it.
+After search the optimal architecture on _FER2013_, you can retrain the model from scratch and test it by running:
+```angular2html
+python train_FER2013.py --batch_size 24 --learning_rate 0.025 --layers 12 --auxiliary_weight 0.4
+```
 
 ## Relabeling
-To further improve the performance on _FER2013_ by reducing uncertainty and executing a robust training, load the saved model after retraining and run `train_relabel.py`. Note that the loaded models are, ideally, the ones saved before totally converged, such as when the training accuracy reaches _85%_ or _90%_. 
+To further improve the performance on _FER2013_ by reducing uncertainty and executing a robust training, load the saved model after retraining and run:
+```angular2html
+python train_relabel.py --batch_size 64 --learning_rate 0.02272721 --relabel_threshold 0.2 --fes True --fes_threshold 0.03
+```
+
+Note that the loaded models are, ideally, the ones saved before totally converged, such as when the training accuracy reaches _85%_ or _90%_. 
 
 The relabeling can be divided into two strategies.
 1. The original relabeling based only on the softmax vector
@@ -26,10 +37,19 @@ The relabeling can be divided into two strategies.
 You are free to customize your relabeling strategy by varing the args (relabel_threshold, fes and fes_threshold) in `train_relabel.py`.
 
 ## Ensemble
-Run `ensemble.py` to get an average inference from different models on _FER2013_. You can customize your ensemble models in the array of `model_names`.
+To get an average inference from different models on _FER2013_. You can customize your ensemble models in the array of `model_names` and `--layers` and run:
+```angular2html
+python ensemble.py --batch_size 64 --layers [12,12,12,12,20,20]
+```
 
 ## Fine-tuning on _CK48_ and _JAFFE_
-After retraining on _FER2013_, you can fine-tune the saved model on _CK48_ and _JAFFE_ by runing `train_CK48.py` and `train_JAFFE.py`.
+After retraining on _FER2013_, you can fine-tune the saved model on _CK48_ and _JAFFE_ by runing:
+```angular2html
+python train_CK48.py --batch_size 64 --learning_rate 0.01794073
+```
+```angular2html
+python train_CK48.py --batch_size 16 --learning_rate 0.01794073
+```
 
 ## Other Tools
 More tools for analysis and visualization are involved in the `tools` folder.
@@ -37,7 +57,7 @@ More tools for analysis and visualization are involved in the `tools` folder.
 ## Results
 ### The searched cells (normal cell and reduction cell):
 
-<img alt="cells.png" src="images/cells.png"/>
+<div align="center"><img alt="cells.png" src="images/cells.png"/></div>
 
 ### Performance
 
