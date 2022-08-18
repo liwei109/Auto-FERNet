@@ -1,5 +1,4 @@
 import sys
-import genotypes
 from graphviz import Digraph
 
 

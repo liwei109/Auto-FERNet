@@ -2,24 +2,20 @@ import os
 import sys
 import time
 import glob
-import numpy as np
 import torch
-import utils
+from tools import utils
 import logging
 import argparse
 import torch.nn as nn
-import genotypes
 import torch.utils
-import torchvision.datasets as dset
 import torch.backends.cudnn as cudnn
 import uuid
 from torch.autograd import Variable
-from model import NetworkCIFAR as Network
-from  genotypes import *
-from dataload_h5 import *
+from NAS.model import NetworkCIFAR as Network
+from dataloader.dataload_h5 import *
 
 
-parser = argparse.ArgumentParser("FER2013")
+parser = argparse.ArgumentParser("CK48")
 # parser.add_argument('--data', type=str, default='../data', help='location of the data corpus')
 parser.add_argument('--batch_size', type=int, default=64, help='batch size')
 parser.add_argument('--learning_rate', type=float, default=0.01794073, help='init learning rate')

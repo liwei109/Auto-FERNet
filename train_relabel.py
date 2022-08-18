@@ -2,24 +2,21 @@ import os
 import sys
 import time
 import glob
-import numpy as np
 import torch
-import utils
+from tools import utils
 import logging
 import argparse
 import torch.nn as nn
-import genotypes
 import torch.utils
-import torchvision.datasets as dset
 import torch.backends.cudnn as cudnn
 import uuid
 from torch.autograd import Variable
-from model import NetworkCIFAR as Network
-from  genotypes import *
-from dataload_h5 import *
+from NAS.model import NetworkCIFAR as Network
+from NAS.genotypes import *
+from dataloader.dataload_h5 import *
 
 
-parser = argparse.ArgumentParser("FER2013")
+parser = argparse.ArgumentParser("Relable")
 # parser.add_argument('--data', type=str, default='../data', help='location of the data corpus')
 parser.add_argument('--batch_size', type=int, default=64, help='batch size')
 parser.add_argument('--learning_rate', type=float, default=0.02272721, help='init learning rate')
@@ -142,7 +139,7 @@ def train(train_queue, model, criterion, optimizer, relabel):
     logits, logits_aux = model(input)
     soft_logits = torch.nn.functional.softmax(logits, dim=1)
 
-    if relabel:  # if label is similary, change the label
+    if relabel:
       for i in range(target.size(0)):
         if args.fes:
           if torch.max(soft_logits[i]) - soft_logits[i][target[i].item()] < args.relabel_threshold \

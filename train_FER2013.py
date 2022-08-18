@@ -2,20 +2,17 @@ import os
 import sys
 import time
 import glob
-import numpy as np
 import torch
-import utils
+from tools import utils
 import logging
 import argparse
 import torch.nn as nn
-import genotypes
 import torch.utils
-import torchvision.datasets as dset
 import torch.backends.cudnn as cudnn
 import uuid
 from torch.autograd import Variable
-from model import NetworkCIFAR as Network
-from dataload_h5 import *
+from NAS.model import NetworkCIFAR as Network
+from dataloader.dataload_h5 import *
 
 os.environ["cuda_visible_devices"] = '1'
 
