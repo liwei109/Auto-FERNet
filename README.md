@@ -1,6 +1,11 @@
 # Auto-FERNet
 This is an implementation of the paper ["Auto-FERNet: A Facial Expression Recognition Network With Architecture Search"](https://ieeexplore.ieee.org/abstract/document/9442348).
-<div align="center"><img alt="overview.png" src="images/overview.png"/></div>
+
+Deep convolutional neural networks have achieved great success in facial expression datasets both under laboratory conditions and in the wild. However, most of these related researches use general image classification networks (e.g., VGG, GoogLeNet) as backbones, which leads to inadaptability while applying to Facial Expression Recognition (FER) task, especially those in the wild. In the meantime, these manually designed networks usually have large parameter size. To tackle with these problems, we propose an appropriative and lightweight Facial Expression Recognition Network Auto-FERNet, which is automatically searched by a differentiable Neural Architecture Search (NAS) model directly on FER dataset. Furthermore, for FER datasets in the wild, we design a simple yet effective relabeling method based on Facial Expression Similarity (FES) to alleviate the uncertainty problem caused by natural factors and the subjectivity of annotators. Experiments have shown the effectiveness of the searched Auto-FERNet on FER task. Concretely, our architecture achieves a test accuracy of 73.78% on FER2013 without ensemble or extra training data. And noteworthily, experimental results on CK+ and JAFFE outperform the state-of-the-art with an accuracy of 98.89% (10 folds) and 97.14%, respectively, which also validate the robustness of our system.
+
+![overview](images/overview.png)Pipeline of Auto-FERNet | ![FES](images/FES.jpg)Facial Expression Similarity (FES) Matrix
+---|---
+
 
 ## Dataloader
 The dataloaders of _FER2013, CK48_ and _JAFFE_ are conducted in `dataloader/dataload_h5.py`.
@@ -57,12 +62,18 @@ More tools for analysis and visualization are involved in the `tools` folder.
 ## Results
 ### The searched cells (normal cell and reduction cell):
 
-<div align="center"><img alt="cells.png" src="images/cells.png"/></div>
+<div align="center"><img alt="cells.png" width=500 height=600 src="images/cells.png"/></div>
 
 ### Performance
 
-<div align="center"><img alt="FER2013.png" src="images/FER2013.png"/></div>
-<div align="center"><img alt="CK_JAFFE.png" src="images/CK_JAFFE.png"/></div>
+<!-- <div align="center"><img alt="FER2013.png" src="images/FER2013.png"/></div>
+<div align="center"><img alt="CK_JAFFE.png" src="images/CK_JAFFE.png"/></div> -->
+
+|Benchmark|Params(MB)|Accuracy|
+|:---:|:---:|:---:|
+| FER2013|2.1|73.78/74.98 (6 ensemble)|
+|CK48|2.1|99.37 (8 folds)/98.89 (10 folds)|
+|JAFFE|2.1|97.14|
 
 ## Citation
 If you think our work inspires you, please cite our paper in your work.
