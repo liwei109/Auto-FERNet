@@ -39,7 +39,7 @@ You are free to customize your relabeling strategy by varing the args (relabel_t
 ## Ensemble
 To get an average inference from different models on _FER2013_. You can customize your ensemble models in the array of `model_names` and `--layers` and run:
 ```angular2html
-python ensemble.py --batch_size 64 --layers [12,12,12,12,20,20]
+python ensemble.py --batch_size 64
 ```
 
 ## Fine-tuning on _CK48_ and _JAFFE_
