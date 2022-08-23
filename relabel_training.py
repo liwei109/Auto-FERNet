@@ -38,6 +38,7 @@ parser.add_argument('--seed', type=int, default=0, help='random seed')
 parser.add_argument('--arch', type=str, default='SGAS', help='which architecture to use')
 parser.add_argument('--grad_clip', type=float, default=5, help='gradient clipping')
 
+parser.add_argument('--checkpoint', type=str, default='./85_weights_12.pt', help='which checkpoint to use')
 parser.add_argument('--relabel_threshold', type=float, default=0.2, help='relabel threshold')
 parser.add_argument('--fes', default=True, help='use similarity matrix')
 parser.add_argument('--fes_threshold', type=float, default=0.03, help='fes threshold')
@@ -77,7 +78,7 @@ def main():
   model = Network(args.init_channels, CIFAR_CLASSES, args.layers, args.auxiliary, genotype)
   # torch.nn.DataParallel(model,args.gpu)
   model = model.cuda()
-  model.load_state_dict(torch.load('./85_weights_12.pt')) # change the site
+  model.load_state_dict(torch.load(args.checkpoint)) # change the site
 
   logging.info("param size = %fMB", utils.count_parameters_in_MB(model))
 
