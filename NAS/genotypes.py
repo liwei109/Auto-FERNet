@@ -29,32 +29,11 @@ FES = [[1., 0.02718851, 0.02188297, 0.02002968, 0.04878107, 0.03223266, 0.058375
        [0.03223266, 0.01381716, 0.04619572, 0.03452561, 0.03472185, 1., 0.05298048],
        [0.05837538, 0.03206117, 0.03383849, 0.05580243, 0.13838511, 0.05298048, 1.]]
 
-# input 32*32
-SGAS_FER2013_gray32 = Genotype(
-    normal=[('dil_conv_3x3', 0), ('sep_conv_3x3', 1), ('sep_conv_3x3', 1), ('dil_conv_5x5', 2), ('dil_conv_5x5', 2),
-            ('dil_conv_3x3', 3), ('skip_connect', 0), ('dil_conv_3x3', 1)], normal_concat=range(2, 6),
-    reduce=[('max_pool_3x3', 0), ('avg_pool_3x3', 1), ('avg_pool_3x3', 1), ('skip_connect', 2), ('avg_pool_3x3', 0),
-            ('sep_conv_5x5', 3), ('max_pool_3x3', 0), ('avg_pool_3x3', 1)], reduce_concat=range(2, 6))
-
-# input 48*48   batch_size = 32
-SGAS_FER2013_gray48 = Genotype(
-    normal=[('sep_conv_3x3', 0), ('dil_conv_3x3', 1), ('dil_conv_3x3', 1), ('skip_connect', 2), ('sep_conv_3x3', 0),
-            ('dil_conv_3x3', 2), ('dil_conv_3x3', 2), ('dil_conv_3x3', 3)], normal_concat=range(2, 6),
-    reduce=[('avg_pool_3x3', 0), ('max_pool_3x3', 1), ('max_pool_3x3', 0), ('avg_pool_3x3', 1), ('avg_pool_3x3', 0),
-            ('avg_pool_3x3', 1), ('max_pool_3x3', 0), ('sep_conv_5x5', 4)], reduce_concat=range(2, 6))
-
-# second search
-SGAS_FER2013_gray48_second = Genotype(
-    normal=[('sep_conv_5x5', 0), ('sep_conv_3x3', 1), ('dil_conv_3x3', 1), ('skip_connect', 2), ('skip_connect', 0),
-            ('dil_conv_3x3', 3), ('skip_connect', 0), ('dil_conv_3x3', 1)], normal_concat=range(2, 6),
-    reduce=[('avg_pool_3x3', 0), ('avg_pool_3x3', 1), ('max_pool_3x3', 1), ('skip_connect', 2), ('max_pool_3x3', 1),
-            ('sep_conv_5x5', 2), ('sep_conv_5x5', 1), ('skip_connect', 2)], reduce_concat=range(2, 6))
-
-# new search space
-SGAS_FER2013_new_search_space = Genotype(
+# search space
+FER2013_search_space = Genotype(
     normal=[('sep_conv_3x3', 0), ('conv_3x3', 1), ('dil_conv_5x5', 0), ('conv_1x1', 2), ('ghost', 2),
             ('dil_conv_5x5', 3), ('skip_connect', 0), ('conv_1x1', 1)], normal_concat=range(2, 6),
     reduce=[('max_pool_3x3', 0), ('max_pool_3x3', 1), ('max_pool_3x3', 0), ('dil_conv_5x5', 2), ('avg_pool_3x3', 1),
             ('skip_connect', 2), ('avg_pool_3x3', 0), ('sep_conv_3x3', 2)], reduce_concat=range(2, 6))
 
-Auto_FERNet = SGAS_FER2013_new_search_space
+Auto_FERNet = FER2013_search_space
