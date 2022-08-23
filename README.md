@@ -53,7 +53,7 @@ After retraining on _FER2013_, you can test the saved model on _CK48_ and on _JA
 python test_CK48.py --batch_size 64 --learning_rate 0.01 --checkpoint checkpoint 
 ```
 ```bash
-python test_JAFFE.py --batch_size 16 --learning_rate 0.01 --checkpoint checkpoint 
+python test_JAFFE.py --checkpoint checkpoint 
 ```
 
 Note: Specially, you can fine-tune the saved model on _CK48_ using its provided training set.
