@@ -32,7 +32,7 @@ python train_FER2013.py --arch  --batch_size 24 --learning_rate 0.025 --layers 1
 ## Relabel Training
 To conduct a relabel training for better performance:
 ```bash
-python train_relabel.py --batch_size 64 --learning_rate 0.001 --relabel_threshold 0.2 --fes True --fes_threshold 0.03 --checkpoint checkpoint
+python relabel_training.py --batch_size 64 --learning_rate 0.001 --relabel_threshold 0.2 --fes True --fes_threshold 0.03 --checkpoint checkpoint
 ```
 Note that the loaded models are, ideally, the ones saved before totally converged, such as when the training accuracy reaches _85%_ or _90%_. 
 
@@ -50,10 +50,10 @@ python ensemble.py --models --batch_size 64
 ## Finetune on _CK48_ and _JAFFE_
 After retraining on _FER2013_, you can fine-tune the saved model on _CK48_ and _JAFFE_ by running:
 ```bash
-python train_CK48.py --checkpoint checkpoint --batch_size 64 --learning_rate 0.01
+python train_CK48.py --batch_size 64 --learning_rate 0.01 --checkpoint checkpoint 
 ```
 ```bash
-python train_JAFFE.py --checkpoint checkpoint --batch_size 16 --learning_rate 0.01
+python train_JAFFE.py --batch_size 16 --learning_rate 0.01 --checkpoint checkpoint 
 ```
 
 ## Results
