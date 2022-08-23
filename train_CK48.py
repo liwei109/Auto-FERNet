@@ -36,7 +36,7 @@ parser.add_argument('--save', type=str, default='EXP', help='experiment name')
 parser.add_argument('--seed', type=int, default=0, help='random seed')
 parser.add_argument('--arch', type=str, default='SGAS', help='which architecture to use')
 parser.add_argument('--grad_clip', type=float, default=5, help='gradient clipping')
-
+parser.add_argument('--checkpoint', type=str, default='./best_test_weights_relabel.pt', help='which checkpoint to use')
 
 args = parser.parse_args()
 
@@ -78,7 +78,7 @@ def main():
 
     model = Network(args.init_channels, CIFAR_CLASSES, args.layers, args.auxiliary, genotype)
     model = model.cuda()
-    model.load_state_dict(torch.load('./best_test_weights_relabel.pt'))
+    model.load_state_dict(torch.load(args.checkpoint))
 
     logging.info("param size = %fMB", utils.count_parameters_in_MB(model))
 
