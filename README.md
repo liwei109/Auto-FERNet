@@ -44,7 +44,7 @@ The relabeling can be divided into two strategies:
 ## Ensemble
 To get an average inference from different models on FER2013. You can customize your ensemble models in `--model_names` and `--layers` and run:
 ```bash
-python ensemble.py --model_names model1,model2 --layers 12,12,20  --batch_size 64
+python ensemble.py --model_names model1,model2,model3 --layers 12,12,20  --batch_size 64
 ```
 
 ## Test on _CK48_ and _JAFFE_
