@@ -253,8 +253,8 @@ def GetJAFFE(args):
     path_test = './data/JAFFE/test/'
 
     transforms_train = transforms.Compose([
-        transforms.Grayscale(),  # 使用ImageFolder默认扩展为三通道，重新变回去就行
-        transforms.RandomHorizontalFlip(),  # 随机翻转
+        transforms.Grayscale(),
+        transforms.RandomHorizontalFlip(),
         transforms.ColorJitter(brightness=0.5, contrast=0.5),
         transforms.ToTensor()
     ])
