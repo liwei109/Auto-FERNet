@@ -57,4 +57,4 @@ SGAS_FER2013_new_search_space = Genotype(
     reduce=[('max_pool_3x3', 0), ('max_pool_3x3', 1), ('max_pool_3x3', 0), ('dil_conv_5x5', 2), ('avg_pool_3x3', 1),
             ('skip_connect', 2), ('avg_pool_3x3', 0), ('sep_conv_3x3', 2)], reduce_concat=range(2, 6))
 
-SGAS = SGAS_FER2013_new_search_space
+Auto_FERNet = SGAS_FER2013_new_search_space
