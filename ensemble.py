@@ -18,7 +18,8 @@ parser.add_argument('--batch_size', type=int, default=64, help='batch size')
 parser.add_argument('--report_freq', type=float, default=100, help='report frequency')
 parser.add_argument('--gpu', type=int, default=1, help='gpu device id')
 parser.add_argument('--init_channels', type=int, default=36, help='num of init channels')
-parser.add_argument('--layers', type=int, default=[12,12,12,12,20,20], help='total number of layers')
+parser.add_argument('--layers', type=str, default='12,12,12,12,20,20', help='total number of layers')
+parser.add_argument('--model_names', type=str, default="12best_test_90weights_relabel.pt,12best_test_85weights_relabel1.pt,12best_test_85weights_relabel_0.2_0.03.pt,12best_test_85weights_relabel2.pt,best_test_85weights_relabel.pt,best_test_90weights_relabel.pt", help='ensemble models')
 parser.add_argument('--model_path', type=str, default='saved_models', help='path to save the model')
 parser.add_argument('--auxiliary', action='store_true', default=True, help='use auxiliary tower')
 parser.add_argument('--auxiliary_weight', type=float, default=0.4, help='weight for auxiliary loss')
@@ -61,12 +62,11 @@ def main():
 
   genotype = eval("genotypes.%s" % args.arch)
 
-  model_names = ["12best_test_90weights_relabel.pt","12best_test_85weights_relabel1.pt","12best_test_85weights_relabel_0.2_0.03.pt",
-                 "12best_test_85weights_relabel2.pt","best_test_85weights_relabel.pt","best_test_90weights_relabel.pt"]
+  model_names = args.model_names.split(',')
   logging.info('model_names {}'.format(model_names))
   models = []
   for i in range(len(model_names)):
-    model = Network(args.init_channels, CIFAR_CLASSES, args.layers[i], args.auxiliary, genotype)
+    model = Network(args.init_channels, CIFAR_CLASSES, list(map(int, args.layers.split(',')))[i], args.auxiliary, genotype)
     model = model.cuda()
     model.load_state_dict(torch.load('./ensemble_models/{}'.format(model_names[i])))
     model.drop_path_prob = args.drop_path_prob
