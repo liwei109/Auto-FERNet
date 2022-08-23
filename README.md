@@ -47,14 +47,16 @@ To get an average inference from different models on FER2013. You can customize 
 python ensemble.py --models --batch_size 64
 ```
 
-## Finetune on _CK48_ and _JAFFE_
-After retraining on _FER2013_, you can fine-tune the saved model on _CK48_ and _JAFFE_ by running:
+## Test on _CK48_ and _JAFFE_
+After retraining on _FER2013_, you can test the saved model on _CK48_ and on _JAFFE_ by running:
 ```bash
-python train_CK48.py --batch_size 64 --learning_rate 0.01 --checkpoint checkpoint 
+python test_CK48.py --batch_size 64 --learning_rate 0.01 --checkpoint checkpoint 
 ```
 ```bash
-python train_JAFFE.py --batch_size 16 --learning_rate 0.01 --checkpoint checkpoint 
+python test_JAFFE.py --batch_size 16 --learning_rate 0.01 --checkpoint checkpoint 
 ```
+
+Note: Specially, you can fine-tune the saved model on _CK48_ using its provided training set.
 
 ## Results
 |Benchmark|Params(MB)|Top-1 Accuracy (%)|
